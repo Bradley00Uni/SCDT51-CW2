@@ -34,6 +34,7 @@ namespace ITS_Support
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<UserModel>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
         }
