@@ -28,7 +28,7 @@ namespace ITS_Support.Data
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };
-            
+
             if (userManager.Users.All(u => u.Id != defaultUser.Id))
             {
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);

@@ -1,0 +1,26 @@
+﻿@model CampusRoomViewModel
+@{
+    ViewData["Title"] = "Campus Management";
+    var RoomCount = 0;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Campuses Overview</h1>
+</div>
+<div class="row">
+    @foreach (CampusModel campus in Model.Campuses)
+    {
+    <div class="col-md-5 campus-display">
+        <h3 class="campus-name">@Html.DisplayFor(modelItem => campus.Name)</h3>
+        @foreach (var i in Model.Rooms)
+        {
+            if (i.Campus == campus.Name)
+            {
+                RoomCount++;
+            }
+        }
+        <h6 class="campus-room"><i>Number of Rooms: @RoomCount</i></h6>
+        @{RoomCount = 0;}
+    </div>
+    }
+</div>

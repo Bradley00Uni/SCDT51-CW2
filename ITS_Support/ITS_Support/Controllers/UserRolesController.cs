@@ -1,4 +1,5 @@
 ﻿using ITS_Support.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ITS_Support.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UserRolesController : Controller
     {
         private readonly UserManager<UserModel> _userManager;
@@ -44,7 +46,7 @@ namespace ITS_Support.Controllers
             if (user == null)
             {
                 ViewBag.ErrorMessage = $"User with ID: {userId} cannot be found";
-                //return View("NotFound");
+                return NotFound();
             }
 
             ViewBag.Username = user.UserName;
