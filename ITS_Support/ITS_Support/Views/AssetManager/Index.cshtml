@@ -1,0 +1,46 @@
+﻿@model RoomAssetViewModel;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Device Management</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+@foreach (CampusModel c in Model.Campuses)
+{
+<div class="row"><h1>@c.Name</h1></div>
+<!--ADD TABLE VIEW-->
+<div class="row">
+    @foreach (AssetModel a in Model.Assets)
+    {
+        @if (a.Room.Campus == c.Name)
+        {
+            <div class="col-md-2 asset-display">
+                @foreach (TypeModel t in Model.Types)
+                {
+                    if (a.Type == t.Category)
+                    {
+                        <img src="@t.DisplayImage" class="asset-display-icon" />
+                    }
+                }
+                <h3 class="asset-display-title">@a.Name</h3>
+                <h5>@a.Room.Campus</h5>
+                <h6>Room: @a.Room.Name</h6>
+                <h6>@a.Type</h6>
+                <p>Ticket Placeholder</p>
+                <div>
+                    <a asp-action="Details" asp-route-id="@a.Id" class="btn btn-block btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@a.Id" class="btn btn-block btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@a.Id" class="btn btn-block btn-danger">Delete</a>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<hr class="section-divide">
+}

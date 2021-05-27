@@ -10,7 +10,7 @@
 <div class="row">
     @foreach (CampusModel campus in Model.Campuses)
     {
-    <div class="col-md-5 campus-display">
+    <div class="col-md-3 campus-display">
         <h3 class="campus-name">@Html.DisplayFor(modelItem => campus.Name)</h3>
         @foreach (var i in Model.Rooms)
         {

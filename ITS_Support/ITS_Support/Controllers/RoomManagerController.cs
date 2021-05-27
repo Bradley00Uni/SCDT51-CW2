@@ -24,7 +24,13 @@ namespace ITS_Support.Views.RoomManager
         // GET: RoomManager
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Rooms.ToListAsync());
+            RoomAssetViewModel roomAssetViewModel = new RoomAssetViewModel()
+            {
+                Rooms = await _context.Rooms.ToListAsync(),
+                Campuses = await _context.Campuses.ToListAsync(),
+                Assets = await _context.Assets.ToListAsync()
+            };
+            return View(roomAssetViewModel);
         }
 
         // GET: RoomManager/Details/5

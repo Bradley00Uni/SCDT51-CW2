@@ -1,59 +1,42 @@
-﻿@model IEnumerable<ITS_Support.Models.RoomModel>
+﻿@model RoomAssetViewModel
 
 @{
     ViewData["Title"] = "Index";
+    var AssetCount = 0;
 }
 
-<h1>Index</h1>
+<h1>Rooms Management</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Campus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Creator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastEdited)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Campus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Creator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastEdited)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+
+@foreach (CampusModel c in Model.Campuses)
+{
+    <div class="row"><h1>@c.Name</h1></div>
+
+    <div class="row">
+        @foreach (RoomModel r in Model.Rooms)
+        {
+            if (r.Campus == c.Name)
+            {
+                <div class="col-md-2 room-display">
+                    <h4 class="room-name">@Html.DisplayFor(modelItem => r.Name)</h4>
+                    @foreach (var a in Model.Assets)
+                    {
+                        if (a.Room == r)
+                        {
+                            AssetCount++;
+                        }
+                    }
+                    <p class="room-assets"><i>Number of Devices: @AssetCount</i></p>
+                    @{AssetCount = 0;}
+                    <a asp-action="Edit" asp-route-id="@r.Id" class="room-assets">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@r.Id" class="room-assets">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@r.Id" class="room-assets">Delete</a>
+                </div>
+            }
+        }
+    </div>
+    <hr class="section-divide">
 }
-    </tbody>
-</table>

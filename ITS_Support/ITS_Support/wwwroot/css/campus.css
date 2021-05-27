@@ -2,7 +2,7 @@
     margin: 3%;
     background-color: crimson;
     height: 250px;
-    width: 700px;
+    width: 500px;
     border: solid;
     border-color: black;
     border-width: thin;
@@ -17,4 +17,53 @@
 .campus-room {
     color: white;
     padding-bottom: 100px;
+}
+
+.room-display {
+    margin: 2%;
+    background-color: crimson;
+    border: solid;
+    border-color: black;
+    border-width: thin;
+    text-align: center;
+    height: 130px;
+    width: 300px;
+}
+
+.room-name {
+    color: white;
+    padding-top: 10px;
+}
+
+.room-assets {
+    color: white;
+}
+
+.section-divide {
+    width: 100%;
+    border-color: #242424;
+    height: 1px;
+}
+
+.asset-display-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: solid;
+    border-color: black;
+    border-width: thin;
+    margin-top: 5px;
+    background-color: white !important;
+}
+
+.asset-display {
+    margin: 1.5%;
+    margin-top: 2%;
+    background-color:palegoldenrod;
+    border: solid;
+    border-color: black;
+    border-width: thin;
+    text-align: center;
+    height: 400px;
+    width: 60px !important;
 }

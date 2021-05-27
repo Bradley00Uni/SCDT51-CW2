@@ -11,9 +11,13 @@ namespace ITS_Support.Data
     {
         public DbSet<CampusModel> Campuses { get; set; }
         public DbSet<RoomModel> Rooms { get; set; }
+        public DbSet<AssetModel> Assets { get; set; }
+        public DbSet<TypeModel> Types { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+        public DbSet<ITS_Support.Models.AssetModel> AssetModel { get; set; }
+        public DbSet<ITS_Support.Models.TypeModel> TypeModel { get; set; }
     }
 }
