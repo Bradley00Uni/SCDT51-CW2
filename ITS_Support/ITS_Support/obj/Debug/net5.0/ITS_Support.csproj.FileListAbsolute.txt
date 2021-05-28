@@ -243,3 +243,13 @@ C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\TypeManager\Edit.cshtml.g.cs
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\TypeManager\Index.cshtml.g.cs
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\AssetManager\Table.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\GeneralTickets\Create.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\GeneralTickets\Delete.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\GeneralTickets\Details.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\GeneralTickets\Edit.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\GeneralTickets\Index.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\TechnicalTickets\Create.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\TechnicalTickets\Delete.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\TechnicalTickets\Details.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\TechnicalTickets\Edit.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\TechnicalTickets\Index.cshtml.g.cs

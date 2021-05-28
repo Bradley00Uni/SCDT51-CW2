@@ -78,6 +78,34 @@ namespace ITS_Support.Data.Migrations
                     b.ToTable("Campuses");
                 });
 
+            modelBuilder.Entity("ITS_Support.Models.GeneralTicketModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExtraDetails")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Issue")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GeneralTickets");
+                });
+
             modelBuilder.Entity("ITS_Support.Models.RoomModel", b =>
                 {
                     b.Property<int>("Id")
@@ -106,6 +134,83 @@ namespace ITS_Support.Data.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("ITS_Support.Models.RoomTicketModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExtraDetails")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Issue")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("RaisedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("RoomTickets");
+                });
+
+            modelBuilder.Entity("ITS_Support.Models.TechnicalTicketModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AssetId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExtraDetails")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Issue")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("RaisedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RaisedRole")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssetId");
+
+                    b.ToTable("TechnicalTickets");
+                });
+
             modelBuilder.Entity("ITS_Support.Models.TypeModel", b =>
                 {
                     b.Property<int>("Id")
@@ -123,6 +228,47 @@ namespace ITS_Support.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TypeModel");
+                });
+
+            modelBuilder.Entity("ITS_Support.Models.UpdateModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GeneralTicketModelId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RoomTicketModelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TechnicalTicketModelId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Update")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeneralTicketModelId");
+
+                    b.HasIndex("RoomTicketModelId");
+
+                    b.HasIndex("TechnicalTicketModelId");
+
+                    b.ToTable("UpdateModel");
                 });
 
             modelBuilder.Entity("ITS_Support.Models.UserModel", b =>
@@ -347,6 +493,43 @@ namespace ITS_Support.Data.Migrations
                     b.Navigation("Room");
                 });
 
+            modelBuilder.Entity("ITS_Support.Models.RoomTicketModel", b =>
+                {
+                    b.HasOne("ITS_Support.Models.RoomModel", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("ITS_Support.Models.TechnicalTicketModel", b =>
+                {
+                    b.HasOne("ITS_Support.Models.AssetModel", "Asset")
+                        .WithMany()
+                        .HasForeignKey("AssetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Asset");
+                });
+
+            modelBuilder.Entity("ITS_Support.Models.UpdateModel", b =>
+                {
+                    b.HasOne("ITS_Support.Models.GeneralTicketModel", null)
+                        .WithMany("Updates")
+                        .HasForeignKey("GeneralTicketModelId");
+
+                    b.HasOne("ITS_Support.Models.RoomTicketModel", null)
+                        .WithMany("Updates")
+                        .HasForeignKey("RoomTicketModelId");
+
+                    b.HasOne("ITS_Support.Models.TechnicalTicketModel", null)
+                        .WithMany("Updates")
+                        .HasForeignKey("TechnicalTicketModelId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -396,6 +579,21 @@ namespace ITS_Support.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ITS_Support.Models.GeneralTicketModel", b =>
+                {
+                    b.Navigation("Updates");
+                });
+
+            modelBuilder.Entity("ITS_Support.Models.RoomTicketModel", b =>
+                {
+                    b.Navigation("Updates");
+                });
+
+            modelBuilder.Entity("ITS_Support.Models.TechnicalTicketModel", b =>
+                {
+                    b.Navigation("Updates");
                 });
 #pragma warning restore 612, 618
         }

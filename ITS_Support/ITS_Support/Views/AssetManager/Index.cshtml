@@ -6,9 +6,16 @@
 
 <h1>Device Management</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
-</p>
+<div class="row">
+    <div class=" col-md-9">
+        <p>
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </p>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-dark btn-block" asp-action="Table">Table View</a>
+    </div>
+</div>
 
 @foreach (CampusModel c in Model.Campuses)
 {

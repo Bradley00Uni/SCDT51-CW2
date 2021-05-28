@@ -19,9 +19,11 @@ namespace ITS_Support.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            CampusRoomViewModel returnModels = new CampusRoomViewModel();
-            returnModels.Campuses = await _context.Campuses.ToListAsync();
-            returnModels.Rooms = await _context.Rooms.ToListAsync();
+            CampusRoomViewModel returnModels = new CampusRoomViewModel
+            {
+                Campuses = await _context.Campuses.ToListAsync(),
+                Rooms = await _context.Rooms.ToListAsync()
+            };
 
             return View(returnModels);
         }

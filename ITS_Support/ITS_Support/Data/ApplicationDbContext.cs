@@ -13,6 +13,10 @@ namespace ITS_Support.Data
         public DbSet<RoomModel> Rooms { get; set; }
         public DbSet<AssetModel> Assets { get; set; }
         public DbSet<TypeModel> Types { get; set; }
+
+        public DbSet<GeneralTicketModel> GeneralTickets { get; set; }
+        public DbSet<TechnicalTicketModel> TechnicalTickets { get; set; }
+        public DbSet<RoomTicketModel> RoomTickets { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
