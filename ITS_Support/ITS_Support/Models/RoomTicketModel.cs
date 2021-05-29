@@ -10,9 +10,6 @@ namespace ITS_Support.Models
     public class RoomTicketModel : TicketAbstractModel
     {
         [Required]
-        public string RaisedBy { get; set; }
-
-        [Required]
         public int RoomId { get; set; }
 
         [ForeignKey("RoomId")]
