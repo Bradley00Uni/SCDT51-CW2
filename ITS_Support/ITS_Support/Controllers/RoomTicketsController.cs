@@ -22,7 +22,13 @@ namespace ITS_Support.Views.RoomTickets
         // GET: RoomTickets
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.RoomTickets.Include(r => r.Room);
+            var applicationDbContext = _context.RoomTickets.Include(r => r.Room).Include(t => t.Updates);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> Table()
+        {
+            var applicationDbContext = _context.RoomTickets.Include(r => r.Room).Include(t => t.Updates);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +41,7 @@ namespace ITS_Support.Views.RoomTickets
             }
 
             var roomTicketModel = await _context.RoomTickets
-                .Include(r => r.Room)
+                .Include(r => r.Room).Include(t => t.Updates)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (roomTicketModel == null)
             {
@@ -76,59 +82,6 @@ namespace ITS_Support.Views.RoomTickets
             return View(roomTicketModel);
         }
 
-        // GET: RoomTickets/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var roomTicketModel = await _context.RoomTickets.FindAsync(id);
-            if (roomTicketModel == null)
-            {
-                return NotFound();
-            }
-            ViewData["RoomId"] = new SelectList(_context.Rooms, "Id", "Name", roomTicketModel.RoomId);
-            return View(roomTicketModel);
-        }
-
-        // POST: RoomTickets/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoomId,Id,Issue,ExtraDetails,CreatedBy,CreatedAt")] RoomTicketModel roomTicketModel)
-        {
-            if (id != roomTicketModel.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(roomTicketModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RoomTicketModelExists(roomTicketModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["RoomId"] = new SelectList(_context.Rooms, "Id", "Name", roomTicketModel.RoomId);
-            return View(roomTicketModel);
-        }
-
         // GET: RoomTickets/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -162,6 +115,32 @@ namespace ITS_Support.Views.RoomTickets
         private bool RoomTicketModelExists(int id)
         {
             return _context.RoomTickets.Any(e => e.Id == id);
+        }
+
+        [HttpPost, ActionName("Update")]
+        public async Task<IActionResult> Comment(string status, string update, int? id)
+        {
+            var roomTicketModel = await _context.RoomTickets.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (roomTicketModel == null)
+            {
+                return NotFound();
+            }
+
+            UpdateModel u = new UpdateModel
+            {
+                Update = update,
+                CreatedAt = DateTime.Now,
+                Status = status,
+                CreatedBy = User.Identity.Name
+            };
+
+            roomTicketModel.Updates.Add(u);
+            _context.Update(roomTicketModel);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Details), new { id = id });
         }
     }
 }

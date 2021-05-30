@@ -20,7 +20,6 @@
 @foreach (CampusModel c in Model.Campuses)
 {
 <div class="row"><h1>@c.Name</h1></div>
-<!--ADD TABLE VIEW-->
 <div class="row">
     @foreach (AssetModel a in Model.Assets)
     {
@@ -38,7 +37,7 @@
                 <h5>@a.Room.Campus</h5>
                 <h6>Room: @a.Room.Name</h6>
                 <h6>@a.Type</h6>
-                <p>Ticket Placeholder</p>
+                <br />
                 <div>
                     <a asp-action="Details" asp-route-id="@a.Id" class="btn btn-block btn-info">Details</a>
                     <a asp-action="Edit" asp-route-id="@a.Id" class="btn btn-block btn-warning">Edit</a>

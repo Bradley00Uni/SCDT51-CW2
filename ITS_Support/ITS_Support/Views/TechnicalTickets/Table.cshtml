@@ -1,0 +1,139 @@
+﻿@model TechnicalTicketViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    var UpdateCount = 0;
+}
+
+<h1>Technical Tickets - Table View</h1>
+
+<div class="row">
+    <div class=" col-md-9">
+        <p>
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </p>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-dark btn-block" asp-action="Index">Visual View</a>
+    </div>
+</div>
+
+<input type="text" class="form-control" id="tableSearch" onkeyup="searchFunction()" placeholder="Search Issues..." />
+<table class="table table-striped" id="ticketTable">
+    <thead class="thead-dark">
+        <tr>
+           <th onclick="sortTickets(0)">Issue</th>
+           <th onclick="sortTickets(1)">Details</th>
+           <th onclick="sortTickets(2)">Device Affected</th>
+           <th onclick="sortTickets(3)">Raised by</th>
+           <th onclick="sortTickets(4)">Updates</th>
+           <th onclick="sortTickets(5)">Created</th>
+           <th onclick="sortTickets(6)">Created By</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TechnicalTickets)
+        {
+            @foreach (var update in item.Updates)
+            {
+                UpdateCount++;
+            }
+            <tr>
+                <td>
+                    @item.Issue
+                </td>
+                <td>
+                    @item.ExtraDetails
+                </td>
+                @foreach (var room in Model.Rooms)
+                {
+                    if (room.Id == item.Asset.RoomId)
+                    {
+                        <td>
+                            @item.Asset.Name (@room.Campus - Room: @room.Name)
+                        </td>
+                    }
+                }
+                <td>
+                    @item.RaisedBy (@item.RaisedRole)
+                </td>
+                <td>
+                    @UpdateCount
+                </td>
+                <td>
+                    @item.CreatedAt
+                </td>
+                <td>
+                    @item.CreatedBy
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+            { UpdateCount = 0; }
+        }
+    </tbody>
+</table>
+
+<script>
+    function searchFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("tableSearch");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("ticketTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function sortTickets(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("ticketTable");
+        switching = true;
+        dir = "asc";
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>

@@ -22,8 +22,22 @@ namespace ITS_Support.Views.TechnicalTickets
         // GET: TechnicalTickets
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.TechnicalTickets.Include(t => t.Asset);
-            return View(await applicationDbContext.ToListAsync());
+            TechnicalTicketViewModel technicalTicketViewModel = new TechnicalTicketViewModel()
+            {
+                TechnicalTickets = await _context.TechnicalTickets.Include(t => t.Asset).Include(t => t.Updates).ToListAsync(),
+                Rooms = await _context.Rooms.ToListAsync()
+            };
+            return View(technicalTicketViewModel);
+        }
+
+        public async Task<IActionResult> Table()
+        {
+            TechnicalTicketViewModel technicalTicketViewModel = new TechnicalTicketViewModel()
+            {
+                TechnicalTickets = await _context.TechnicalTickets.Include(t => t.Asset).Include(t => t.Updates).ToListAsync(),
+                Rooms = await _context.Rooms.ToListAsync()
+            };
+            return View(technicalTicketViewModel);
         }
 
         // GET: TechnicalTickets/Details/5
@@ -35,7 +49,7 @@ namespace ITS_Support.Views.TechnicalTickets
             }
 
             var technicalTicketModel = await _context.TechnicalTickets
-                .Include(t => t.Asset)
+                .Include(t => t.Asset).Include(t => t.Updates)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (technicalTicketModel == null)
             {
@@ -64,59 +78,6 @@ namespace ITS_Support.Views.TechnicalTickets
                 technicalTicketModel.CreatedAt = DateTime.Now;
                 _context.Add(technicalTicketModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AssetId"] = new SelectList(_context.Assets, "Id", "Name", technicalTicketModel.AssetId);
-            return View(technicalTicketModel);
-        }
-
-        // GET: TechnicalTickets/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var technicalTicketModel = await _context.TechnicalTickets.FindAsync(id);
-            if (technicalTicketModel == null)
-            {
-                return NotFound();
-            }
-            ViewData["AssetId"] = new SelectList(_context.Assets, "Id", "Name", technicalTicketModel.AssetId);
-            return View(technicalTicketModel);
-        }
-
-        // POST: TechnicalTickets/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RaisedBy,RaisedRole,AssetId,Id,Issue,ExtraDetails,CreatedBy,CreatedAt")] TechnicalTicketModel technicalTicketModel)
-        {
-            if (id != technicalTicketModel.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(technicalTicketModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TechnicalTicketModelExists(technicalTicketModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AssetId"] = new SelectList(_context.Assets, "Id", "Name", technicalTicketModel.AssetId);
@@ -156,6 +117,32 @@ namespace ITS_Support.Views.TechnicalTickets
         private bool TechnicalTicketModelExists(int id)
         {
             return _context.TechnicalTickets.Any(e => e.Id == id);
+        }
+
+        [HttpPost, ActionName("Update")]
+        public async Task<IActionResult> Comment(string status, string update, int? id)
+        {
+            var technicalTicketModel = await _context.TechnicalTickets.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (technicalTicketModel == null)
+            {
+                return NotFound();
+            }
+
+            UpdateModel u = new UpdateModel
+            {
+                Update = update,
+                CreatedAt = DateTime.Now,
+                Status = status,
+                CreatedBy = User.Identity.Name
+            };
+
+            technicalTicketModel.Updates.Add(u);
+            _context.Update(technicalTicketModel);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Details), new { id = id });
         }
     }
 }

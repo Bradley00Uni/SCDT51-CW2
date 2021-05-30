@@ -65,7 +65,7 @@ namespace ITS_Support
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Campus}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

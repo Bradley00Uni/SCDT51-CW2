@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/campus.css" />
+    <link rel="stylesheet" href="~/css/ticket.css" />
 </head>
 <body>
     <header>
@@ -26,19 +27,30 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Campus" asp-action="Index">Campuses</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="RoomManager" asp-action="Index">Rooms</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="Index">Rooms</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AssetManager" asp-action="Index">Devices</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Asset" asp-action="Index">Devices</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="GeneralTickets" asp-action="Index">General Tickets</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownTicket" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Support Tickets
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownTicket">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="GeneralTickets" asp-action="Index">General Tickets</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="TechnicalTickets" asp-action="Index">Technical Tickets</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RoomTickets" asp-action="Index">Room Tickets</a>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TechnicalTickets" asp-action="Index">Technical Tickets</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="RoomTickets" asp-action="Index">Room Tickets</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Manager Menu
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="CampusManager" asp-action="Index">Campus Management</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RoomManager" asp-action="Index">Room Management</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="AssetManager" asp-action="Index">Device Management</a>
+                            </div>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />

@@ -2,64 +2,57 @@
 
 @{
     ViewData["Title"] = "Index";
+    bool complete = false;
+    var UpdateCount = 0;
 }
 
-<h1>Index</h1>
+<h1>Room Tickets</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Campus
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Room)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Issue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExtraDetails)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Room.Campus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Room.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Issue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExtraDetails)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row button-row">
+    <div class=" col-md-9">
+        <p>
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </p>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-dark btn-block" asp-action="Table">Table View</a>
+    </div>
+</div>
+
+<div class="row ticket-row">
+    @foreach (var item in Model)
+    {
+        complete = false;
+        @foreach (var update in item.Updates)
+        {
+            if (update.Status.ToString() == "Complete")
+            {
+                complete = true;
+            }
+            UpdateCount++;
+        }
+        if (complete == false)
+        {
+            <div class="col-md-3">
+                <div class="ticket">
+                    <div class="ticket-content">
+                        @{var DateFormat = item.CreatedAt.Date.ToString().Substring(0, 10);}
+                        @{var TimeFormat = item.CreatedAt.TimeOfDay.ToString().Substring(0, 5);}
+                        <h3 class="ticket-date">@DateFormat</h3>
+                        <h5 class="ticket-time">@TimeFormat</h5>
+                        <h3 class="ticket-issue">@item.Issue</h3>
+                        <p class="ticket-text">@item.ExtraDetails</p>
+                        <p><b>Campus:</b> @item.Room.Campus</p>
+                        <p><b>Room:</b> @item.Room.Name</p>
+                        <p class="ticket-update-count">Updates: @UpdateCount</p>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info ticket-button">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger ticket-button">Delete</a>
+                        <br /><br /><br />
+                        <h5 class="ticket-author">@item.CreatedBy</h5>
+                    </div>
+                </div>
+            </div>
+        }
+        UpdateCount = 0;
+    }
+</div>

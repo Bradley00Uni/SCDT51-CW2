@@ -1,0 +1,79 @@
+﻿.ticket {
+    box-sizing: border-box;
+    width: 250px;
+    padding: 20px;
+    margin-top: 10%;
+    border-radius: 10px;
+    background: #FBFBFB;
+    box-shadow: 2px 2px 15px 0px #808080;
+}
+
+.ticket-content {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    border: 6px solid #D8D8D8;
+    text-align: center;
+}
+
+.ticket-date{
+    color: darkblue;
+}
+
+.ticket-time {
+    color: darkblue;
+}
+
+.ticket-issue{
+
+}
+
+.ticket-text {
+    color: #808080;
+}
+
+.ticket-author{
+    color: crimson;
+    text-align: right !important;
+}
+
+.ticket-raised {
+    color: forestgreen;
+    text-align: right !important;
+}
+
+.ticket-row{
+    margin-top: 5%;
+}
+
+.ticket-details{
+    font-size:x-large !important;
+}
+
+.update {
+    border: solid;
+    border-color: black;
+    border-width: thin;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px 0px #808080;
+    margin-bottom: 1%;
+    background-color: lemonchiffon;
+}
+
+.update-author{
+    color: crimson;
+}
+
+.update-title{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.update-form {
+    border: solid;
+    border-color: black;
+    border-width: thin;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px 0px #808080;
+    margin-bottom: 1%;
+}

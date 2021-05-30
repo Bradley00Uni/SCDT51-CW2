@@ -20,9 +20,14 @@ namespace ITS_Support.Views.GeneralTickets
         }
 
         // GET: GeneralTickets
+        public async Task<IActionResult> Table()
+        {
+            return View(await _context.GeneralTickets.Include(t => t.Updates).ToListAsync());
+        }
+
         public async Task<IActionResult> Index()
         {
-            return View(await _context.GeneralTickets.ToListAsync());
+            return View(await _context.GeneralTickets.Include(t => t.Updates).ToListAsync());
         }
 
         // GET: GeneralTickets/Details/5
@@ -33,14 +38,20 @@ namespace ITS_Support.Views.GeneralTickets
                 return NotFound();
             }
 
-            var generalTicketModel = await _context.GeneralTickets
+            var generalTicketModel = await _context.GeneralTickets.Include(t => t.Updates)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (generalTicketModel == null)
             {
                 return NotFound();
             }
 
-            return View(generalTicketModel);
+            GeneralTicketViewModel generalTicketViewModel = new GeneralTicketViewModel()
+            {
+                GeneralTicket = generalTicketModel,
+                Update = new UpdateModel()
+            };
+
+            return View(generalTicketViewModel);
         }
 
         // GET: GeneralTickets/Create
@@ -61,58 +72,6 @@ namespace ITS_Support.Views.GeneralTickets
                 generalTicketModel.CreatedAt = DateTime.Now;
                 _context.Add(generalTicketModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(generalTicketModel);
-        }
-
-        // GET: GeneralTickets/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var generalTicketModel = await _context.GeneralTickets.FindAsync(id);
-            if (generalTicketModel == null)
-            {
-                return NotFound();
-            }
-            return View(generalTicketModel);
-        }
-
-        // POST: GeneralTickets/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Issue,ExtraDetails,CreatedBy,CreatedAt")] GeneralTicketModel generalTicketModel)
-        {
-            if (id != generalTicketModel.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    generalTicketModel.CreatedAt = DateTime.Now;
-                    _context.Update(generalTicketModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!GeneralTicketModelExists(generalTicketModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View(generalTicketModel);
@@ -150,6 +109,32 @@ namespace ITS_Support.Views.GeneralTickets
         private bool GeneralTicketModelExists(int id)
         {
             return _context.GeneralTickets.Any(e => e.Id == id);
+        }
+
+        [HttpPost, ActionName("Update")]
+        public async Task<IActionResult> Comment(string status, string update, int? id)
+        {
+            var generalTicketModel = await _context.GeneralTickets.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (generalTicketModel == null)
+            {
+                return NotFound();
+            }
+
+            UpdateModel u = new UpdateModel
+            {
+                Update = update,
+                CreatedAt = DateTime.Now,
+                Status = status,
+                CreatedBy = User.Identity.Name
+            };
+
+            generalTicketModel.Updates.Add(u);
+            _context.Update(generalTicketModel);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Details), new { id = id });
         }
     }
 }

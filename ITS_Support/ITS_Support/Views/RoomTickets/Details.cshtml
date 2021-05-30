@@ -4,45 +4,95 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="row button-row">
+    <div class="col-md-4">
+        <h1>Ticket Details</h1>
+    </div>
+    <div class="col-md-3 offset-5">
+        <a class="btn btn-primary btn-block" asp-action="Index">Return to Tickets</a>
+    </div>
+</div>
 
 <div>
-    <h4>RoomTicketModel</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Room)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Room.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Issue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Issue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExtraDetails)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExtraDetails)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <dl class="row ticket-details">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Room)
+                </dt>
+                <dt class="col-sm-2"></dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Room.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    Campus
+                </dt>
+                <dt class="col-sm-2"></dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Room.Campus)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Issue)
+                </dt>
+                <dt class="col-sm-2"></dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Issue)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ExtraDetails)
+                </dt>
+                <dt class="col-sm-2"></dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.ExtraDetails)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CreatedBy)
+                </dt>
+                <dt class="col-sm-2"></dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.CreatedBy)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CreatedAt)
+                </dt>
+                <dt class="col-sm-2"></dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.CreatedAt)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="col-md-6 offset-5 update-title">
+        <h2 class="align-items-center">Updates</h2>
+    </div>
+    <div class="row">
+        @foreach (UpdateModel update in Model.Updates)
+        {
+            <div class="col-md-6 offset-3 update">
+                <div class="col-md-12">
+                    <h5>@update.Status - @update.Update</h5>
+                </div>
+                <div class="col-md-8">
+                    <p class="update-author">@update.CreatedAt.ToString().Substring(0, 8) - <b>@update.CreatedBy</b></p>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="col-md-6 offset-4 update-title">
+        <h2 class="align-items-center">Create an Update</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <form asp-action="Update" method="post" class="row" id="UpdateForm">
+                <input name="id" value="@Model.Id" type="hidden" />
+                @Html.DropDownList("status", new SelectList(Enum.GetValues(typeof(StatusOptions))), "Status", new { @class = "form-select btn btn-dark btn-block col-md-4" })
+                <input class="form-control col-md-8" type="text" placeholder="Details" name="update" />
+                <button type="submit" class="btn btn-dark w-100 mt-2">Submit</button>
+            </form>
+        </div>
+    </div>
+
 </div>

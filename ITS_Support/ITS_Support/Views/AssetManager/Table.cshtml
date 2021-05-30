@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<input type="text" id="tableSearch" onkeyup="searchFunction()" placeholder="Search Devices..." />
+<input type="text" class="form-control" id="tableSearch" onkeyup="searchFunction()" placeholder="Search Devices..." />
 <table class="table table-striped" id="assetTable">
     <thead class="thead-dark">
         <tr>
@@ -57,9 +57,9 @@
                 @asset.LastEdited
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@asset.Id" class="btn btn-info">Details</a>
-                <a asp-action="Edit" asp-route-id="@asset.Id" class="btn btn-warning">Edit</a>
-                <a asp-action="Delete" asp-route-id="@asset.Id" class="btn btn-danger">Delete</a>
+                <a asp-action="Details" asp-route-id="@asset.Id">Details</a>
+                <a asp-action="Edit" asp-route-id="@asset.Id">Edit</a>
+                <a asp-action="Delete" asp-route-id="@asset.Id">Delete</a>
             </td>
         </tr>
 }

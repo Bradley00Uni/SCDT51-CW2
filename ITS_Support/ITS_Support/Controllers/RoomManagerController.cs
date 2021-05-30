@@ -33,6 +33,17 @@ namespace ITS_Support.Views.RoomManager
             return View(roomAssetViewModel);
         }
 
+        public async Task<IActionResult> Table()
+        {
+            RoomAssetViewModel roomAssetViewModel = new RoomAssetViewModel()
+            {
+                Rooms = await _context.Rooms.ToListAsync(),
+                Campuses = await _context.Campuses.ToListAsync(),
+                Assets = await _context.Assets.ToListAsync()
+            };
+            return View(roomAssetViewModel);
+        }
+
         // GET: RoomManager/Details/5
         public async Task<IActionResult> Details(int? id)
         {

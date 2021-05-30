@@ -22,7 +22,13 @@ namespace ITS_Support.Views.CampusManager
         // GET: CampusManager
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Campuses.ToListAsync());
+            CampusRoomViewModel returnModels = new CampusRoomViewModel
+            {
+                Campuses = await _context.Campuses.ToListAsync(),
+                Rooms = await _context.Rooms.ToListAsync()
+            };
+
+            return View(returnModels);
         }
 
         // GET: CampusManager/Details/5
@@ -89,7 +95,7 @@ namespace ITS_Support.Views.CampusManager
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Creator,CreatedAt,LastEdited")] CampusModel campusModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Creator,CreatedAt,LastEdited, ImageURL")] CampusModel campusModel)
         {
             if (id != campusModel.Id)
             {

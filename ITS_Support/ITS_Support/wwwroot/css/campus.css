@@ -1,22 +1,40 @@
-﻿.campus-display {
-    margin: 3%;
-    background-color: crimson;
-    height: 250px;
-    width: 500px;
-    border: solid;
-    border-color: black;
-    border-width: thin;
+﻿.campus-image {
+    width: 450px;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px 0px #808080;
+}
+
+.campus-detail-image {
+    width: 450px;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px 0px #808080;
+}
+
+.campus-col {
+    margin-top: 7%;
     text-align: center;
 }
 
 .campus-name {
     color: white;
-    padding-top: 100px;
+    position: absolute;
+    bottom: 50%;
+    left: 35%;
+    text-shadow: 3px 3px black;
 }
 
-.campus-room {
+.campus-button {
+    position: absolute;
+    bottom: 10%;
+    left: 33%;
+}
+
+.campus-rooms {
     color: white;
-    padding-bottom: 100px;
+    position: absolute;
+    bottom: 40%;
+    left: 38%;
+    text-shadow: 3px 3px black;
 }
 
 .room-display {
@@ -28,6 +46,8 @@
     text-align: center;
     height: 130px;
     width: 300px;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px 0px #808080;
 }
 
 .room-name {
@@ -59,11 +79,27 @@
 .asset-display {
     margin: 1.5%;
     margin-top: 2%;
-    background-color:palegoldenrod;
+    background-color: palegoldenrod;
     border: solid;
     border-color: black;
     border-width: thin;
     text-align: center;
     height: 400px;
     width: 60px !important;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px 0px #808080;
+}
+
+.asset-display-support {
+    margin: 1.5%;
+    margin-top: 2%;
+    background-color: palegoldenrod;
+    border: solid;
+    border-color: black;
+    border-width: thin;
+    text-align: center;
+    height: 300px;
+    width: 60px !important;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px 0px #808080;
 }

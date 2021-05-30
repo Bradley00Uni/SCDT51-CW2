@@ -66,6 +66,9 @@ namespace ITS_Support.Data.Migrations
                     b.Property<string>("Creator")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("LastEdited")
                         .HasColumnType("datetime2");
 
@@ -246,8 +249,9 @@ namespace ITS_Support.Data.Migrations
                     b.Property<int?>("RoomTicketModelId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TechnicalTicketModelId")
                         .HasColumnType("int");

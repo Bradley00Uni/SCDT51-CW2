@@ -15,7 +15,7 @@ namespace ITS_Support.Models
         public string Update { get; set; }
 
         [Required]
-        public StatusOptions Status { get; set; }
+        public string Status { get; set; }
 
         [Required]
         public string CreatedBy { get; set; }

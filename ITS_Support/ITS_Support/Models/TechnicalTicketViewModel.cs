@@ -8,7 +8,7 @@ namespace ITS_Support.Models
 {
     public class TechnicalTicketViewModel
     {
-        public TechnicalTicketModel TechnicalTicket { get; set; }
-        public IEnumerable<SelectListItem> Assets { get; set; } 
+        public IEnumerable<TechnicalTicketModel> TechnicalTickets { get; set; }
+        public IEnumerable<RoomModel> Rooms { get; set; } 
     }
 }

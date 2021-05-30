@@ -1,0 +1,121 @@
+﻿@model RoomAssetViewModel
+
+@{
+    ViewData["Title"] = "Table Index";
+}
+
+<h1>Device Overview - Table View</h1>
+
+<div class="row">
+    <div class="col-md-3 offset-9">
+        <a class="btn btn-dark btn-block" asp-action="Index">Visual View</a>
+    </div>
+</div>
+
+<input type="text" class="form-control" id="tableSearch" onkeyup="searchFunction()" placeholder="Search Devices..." />
+<table class="table table-striped" id="assetTable">
+    <thead class="thead-dark">
+        <tr>
+            <th onclick="sortAssets(0)">Name</th>
+            <th onclick="sortAssets(1)">Type</th>
+            <th onclick="sortAssets(2)">Room</th>
+            <th onclick="sortAssets(3)">Campus</th>
+            <th onclick="sortAssets(4)">Creator</th>
+            <th onclick="sortAssets(5)">Created</th>
+            <th onclick="sortAssets(6)">Last Edited</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach(AssetModel asset in Model.Assets)
+{
+        <tr>
+            <td>
+                @asset.Name
+            </td>
+            <td>
+                @asset.Type
+            </td>
+            <td>
+                @asset.Room.Name
+            </td>
+            <td>
+                @asset.Room.Campus
+            </td>
+            <td>
+                @asset.Creator
+            </td>
+            <td>
+                @asset.CreatedAt
+            </td>
+            <td>
+                @asset.LastEdited
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@asset.Id">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<script>
+    function searchFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("tableSearch");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("assetTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function sortAssets(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("assetTable");
+        switching = true;
+        dir = "asc";
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>

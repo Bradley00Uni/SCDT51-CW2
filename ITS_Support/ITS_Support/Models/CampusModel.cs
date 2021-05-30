@@ -22,5 +22,7 @@ namespace ITS_Support.Models
 
         [Display(Name = "Last Edited")]
         public DateTime LastEdited { get; set; }
+
+        public string ImageURL { get; set; }
     }
 }
