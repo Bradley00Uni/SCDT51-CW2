@@ -135,7 +135,6 @@ C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\ITS_Support.RazorCoreGenerate.cache
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
@@ -262,3 +261,6 @@ C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Asset\Details.cshtml.g.cs
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Asset\Table.cshtml.g.cs
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Campus\Details.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Room\Details.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Room\Index.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Room\Table.cshtml.g.cs

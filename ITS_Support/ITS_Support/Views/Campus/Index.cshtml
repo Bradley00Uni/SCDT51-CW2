@@ -5,7 +5,7 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Campus Management</h1>
+    <h1 class="display-4">Campus Overview</h1>
 </div>
 <div class="row">
     @foreach (CampusModel campus in Model.Campuses)
@@ -21,8 +21,8 @@
                 }
             }
             <h5 class="campus-rooms"><b>Room Count:</b> @RoomCount</h5>
-            <div class="campus-button">
-                <a asp-action="Details" asp-route-id="@campus.Id" class="btn btn-light">Details</a>
+            <div class="campus-button col-md-4">
+                <a asp-action="Details" asp-route-id="@campus.Id" class="btn btn-light btn-block">Details</a>
             </div>
         </div>
         { RoomCount = 0; }

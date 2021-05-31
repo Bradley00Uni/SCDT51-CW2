@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ITS_Support.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager, Admin")]
     public class RoleManagerController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;

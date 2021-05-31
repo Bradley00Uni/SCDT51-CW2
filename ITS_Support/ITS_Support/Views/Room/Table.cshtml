@@ -1,0 +1,126 @@
+﻿@model RoomAssetViewModel
+
+@{
+    ViewData["Title"] = "Table Index";
+    var AssetCount = 0;
+}
+
+<h1>Rooms Overview - Table View</h1>
+
+<div class="row">
+    <div class="col-md-3 offset-9">
+        <a class="btn btn-dark btn-block" asp-action="Index">Visual View</a>
+    </div>
+</div>
+
+<input type="text" class="form-control" id="tableSearch" onkeyup="searchFunction()" placeholder="Search Rooms..." />
+<table class="table table-striped" id="roomTable">
+    <thead class="thead-dark">
+        <tr>
+            <th onclick="sortRooms(0)">Name</th>
+            <th onclick="sortRooms(1)">Campus</th>
+            <th onclick="sortRooms(2)">Asset Count</th>
+            <th onclick="sortRooms(3)">Created</th>
+            <th onclick="sortRooms(4)">Last Edited</th>
+            <th onclick="sortRooms(5)">Last Edited By</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (RoomModel room in Model.Rooms)
+        {
+            <tr>
+                <td>
+                    @room.Name
+                </td>
+                <td>
+                    @room.Campus
+                </td>
+                @foreach (AssetModel asset in Model.Assets)
+                {
+                    if(asset.RoomId == room.Id)
+                    {
+                        AssetCount++;
+                    }
+                }
+                <td>
+                    @AssetCount
+                </td>
+                @{AssetCount = 0;}
+                <td>
+                    @room.CreatedAt
+                </td>
+                <td>
+                    @room.LastEdited
+                </td>
+                <td>
+                    @room.Creator
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@room.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function searchFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("tableSearch");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("roomTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function sortRooms(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("roomTable");
+        switching = true;
+        dir = "asc";
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>

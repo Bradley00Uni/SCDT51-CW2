@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ITS_Support.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Manager")]
     public class UserRolesController : Controller
     {
         private readonly UserManager<UserModel> _userManager;

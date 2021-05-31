@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ITS_Support.Data;
 using ITS_Support.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ITS_Support.Views.TypeManager
 {
+    [Authorize(Roles = "Admin, Manager")]
     public class TypeManagerController : Controller
     {
         private readonly ApplicationDbContext _context;

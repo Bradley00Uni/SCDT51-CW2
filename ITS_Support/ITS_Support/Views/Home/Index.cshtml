@@ -3,6 +3,58 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-3">Welcome to the ITS Support System</h1>
 </div>
+
+<h1 class="text-center display-4 home-title">Object Overviews</h1>
+<div class="row">
+    <div class="col-md-4">
+        <a class="btn btn-block btn-warning home-button" asp-area="" asp-controller="Campus" asp-action="Index"><h3 class="button-text">Campuses</h3></a>
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-warning home-button" asp-area="" asp-controller="Room" asp-action="Index"><h3 class="button-text">Room</h3></a>
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-warning home-button" asp-area="" asp-controller="Asset" asp-action="Index"><h3 class="button-text">Devices</h3></a>
+    </div>
+</div>
+<hr class="section-divide">
+
+<h1 class="text-center display-4 home-title">Ticket Management</h1>
+<div class="row">
+    <div class="col-md-4">
+        <a class="btn btn-block btn-warning home-button" asp-area="" asp-controller="GeneralTickets" asp-action="Index"><h3 class="button-text">General Tickets</h3></a>
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-warning home-button" asp-area="" asp-controller="TechnicalTickets" asp-action="Index"><h3 class="button-text">Technical Tickets</h3></a>
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-warning home-button" asp-area="" asp-controller="RoomTickets" asp-action="Index"><h3 class="button-text">Room Tickets</h3></a>
+    </div>
+</div>
+<hr class="section-divide">
+
+<h1 class="text-center display-4 home-title">Manager Options</h1>
+<div class="row">
+    <div class="col-md-4">
+        <a class="btn btn-block btn-warning home-button" asp-area="" asp-controller="CampusManager" asp-action="Index"><h3 class="button-text">Campus Management</h3></a>
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-warning home-button" asp-area="" asp-controller="RoomManager" asp-action="Index"><h3 class="button-text">Room Management</h3></a>
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-warning home-button" asp-area="" asp-controller="AssetManager" asp-action="Index"><h3 class="button-text">Device Management</h3></a>
+    </div>
+</div>
+<div class="row button-second-row">
+    <div class="col-md-4">
+        <a class="btn btn-block btn-warning home-button" asp-area="" asp-controller="TypeManager" asp-action="Index"><h3 class="button-text">Device Types</h3></a>
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-warning home-button" asp-area="" asp-controller="RoleManager" asp-action="Index"><h3 class="button-text">Role Types</h3></a>
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-block btn-warning home-button" asp-area="" asp-controller="UserRoles" asp-action="Index"><h3 class="button-text">User Roles</h3></a>
+    </div>
+</div>
+<hr class="section-divide">

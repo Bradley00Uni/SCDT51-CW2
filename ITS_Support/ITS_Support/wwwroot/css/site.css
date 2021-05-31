@@ -69,3 +69,30 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Home Page styles
+-------------------------------------------------- */
+.home-button {
+    height: 100px !important;
+    text-align: center;
+    border: solid;
+    border-color: black;
+    border-width: thin;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px 0px #808080;
+}
+
+.button-text {
+    margin-top: 7%;
+    color: white;
+    text-shadow: 2px 2px black;
+}
+
+.home-title{
+    margin-top: 4%;
+    margin-bottom:3%;
+}
+
+.button-second-row{
+    margin-top: 2%;
+}

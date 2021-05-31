@@ -20,7 +20,7 @@
 
 <input type="text" class="form-control" id="tableSearch" onkeyup="searchFunction()" placeholder="Search Issues..." />
 <table class="table table-striped" id="ticketTable">
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <th onclick="sortTickets(0)">
                 @Html.DisplayNameFor(model => model.Issue)

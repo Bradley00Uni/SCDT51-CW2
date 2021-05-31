@@ -1,0 +1,42 @@
+﻿@model RoomAssetViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    var AssetCount = 0;
+}
+
+<h1>Rooms Overview</h1>
+
+<div class="row">
+    <div class="col-md-3 offset-9">
+        <a class="btn btn-dark btn-block" asp-action="Table">Table View</a>
+    </div>
+</div>
+
+@foreach (CampusModel c in Model.Campuses)
+{
+    <div class="row"><h1>@c.Name</h1></div>
+
+    <div class="row">
+        @foreach (RoomModel r in Model.Rooms)
+        {
+            if (r.Campus == c.Name)
+            {
+                <div class="col-md-2 room-display">
+                    <h4 class="room-name">@Html.DisplayFor(modelItem => r.Name)</h4>
+                    @foreach (var a in Model.Assets)
+                    {
+                        if (a.Room == r)
+                        {
+                            AssetCount++;
+                        }
+                    }
+                    <p class="room-assets"><i>Number of Devices: @AssetCount</i></p>
+                    @{AssetCount = 0;}
+                    <a asp-action="Details" asp-route-id="@r.Id" class="room-assets">Details</a>
+                </div>
+            }
+        }
+    </div>
+    <hr class="section-divide">
+}

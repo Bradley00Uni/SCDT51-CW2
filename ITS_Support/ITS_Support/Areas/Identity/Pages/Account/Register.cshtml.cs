@@ -63,6 +63,8 @@ namespace ITS_Support.Areas.Identity.Pages.Account
 
             [Required]
             [Phone]
+            [MinLength(11)]
+            [MaxLength(11)]
             [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }
 
