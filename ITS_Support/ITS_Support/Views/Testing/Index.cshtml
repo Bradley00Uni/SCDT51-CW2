@@ -1,0 +1,76 @@
+﻿@model TestingViewModel
+
+@{ 
+    ViewData["Title"] = "Testing";
+    var CampusCount = 0; var AssetCount = 0; var RoomCount = 0; var GTickets = 0; var TTickets = 0; var RTickets = 0;
+}
+
+@{ 
+    foreach (var c in Model.Campuses)
+    {
+        CampusCount++;
+
+    }
+    foreach (var a in Model.Assets)
+    {
+        AssetCount++;
+
+    }
+    foreach (var r in Model.Rooms)
+    {
+        RoomCount++;
+
+    }
+    foreach (var g in Model.GeneralTickets)
+    {
+        GTickets++;
+
+    }
+    foreach (var t in Model.TechnicalTickets)
+    {
+        TTickets++;
+
+    }
+    foreach (var r in Model.RoomTickets)
+    {
+        RTickets++;
+
+    }
+}
+
+<h1>Integration Testing</h1>
+
+<table class="table table-sripted">
+    <thead>
+        <tr>
+            <th>Table</th>
+            <th>Number of Objects</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Campuses</td>
+            <td>@CampusCount</td>
+        </tr>
+        <tr>
+            <td>Rooms</td>
+            <td>@RoomCount</td>
+        </tr>
+        <tr>
+            <td>Assets</td>
+            <td>@AssetCount</td>
+        </tr>
+        <tr>
+            <td>General Tickets</td>
+            <td>@GTickets</td>
+        </tr>
+        <tr>
+            <td>Technical Tickets</td>
+            <td>@TTickets</td>
+        </tr>
+        <tr>
+            <td>Room Tickets</td>
+            <td>@RTickets</td>
+        </tr>
+    </tbody>
+</table>

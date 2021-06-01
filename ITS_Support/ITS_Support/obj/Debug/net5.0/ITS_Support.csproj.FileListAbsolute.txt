@@ -264,3 +264,4 @@ C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Room\Details.cshtml.g.cs
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Room\Index.cshtml.g.cs
 C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Room\Table.cshtml.g.cs
+C:\Users\bradl\Documents\GitHub\SCDT51-CW2\ITS_Support\ITS_Support\obj\Debug\net5.0\Razor\Views\Testing\Index.cshtml.g.cs
